@@ -4,7 +4,8 @@ import 'package:news/models/category_model.dart';
 import 'package:news/view/categories/category_item.dart';
 
 class CategoriesGrid extends StatelessWidget {
-  const CategoriesGrid({super.key});
+  const CategoriesGrid({super.key, required this.onCategorySelected});
+  final void Function(CategoryModel) onCategorySelected;
 
   @override
   Widget build(BuildContext context) {
@@ -38,10 +39,18 @@ class CategoriesGrid extends StatelessWidget {
                 mainAxisSpacing: 24,
                 crossAxisSpacing: 24,
               ),
-              itemBuilder: (_, index) => CategoryItem(
-                index: index,
-                category: categories[index],
-              ),
+              itemBuilder: (_, index) {
+                CategoryModel category = categories[index];
+                return InkWell(
+                  onTap: () {
+                    onCategorySelected(category);
+                  },
+                  child: CategoryItem(
+                    index: index,
+                    category: category,
+                  ),
+                );
+              },
               itemCount: categories.length,
             ),
           ),

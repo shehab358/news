@@ -18,7 +18,6 @@ class AppTheme {
         borderRadius: BorderRadius.circular(
           32,
         ),
-
       ),
       titleTextStyle: TextStyle(
         fontSize: 22,
