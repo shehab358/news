@@ -33,14 +33,14 @@ class NewsItem extends StatelessWidget {
             ),
           ),
           Text(
-            article.title ?? '',
+            article.source?.name ?? '',
             style: titleSmall?.copyWith(fontSize: 10, color: AppTheme.grey),
           ),
           const SizedBox(
             height: 4,
           ),
           Text(
-            article.description ?? '',
+            article.title ?? '',
             style: titleSmall?.copyWith(
               fontWeight: FontWeight.w500,
             ),

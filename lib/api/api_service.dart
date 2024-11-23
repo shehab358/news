@@ -24,7 +24,7 @@ class ApiService {
   static Future<NewsResponse> getNEws(String sourceID) async {
     final uri = Uri.http(
       ApiConstans.baseURL,
-      ApiConstans.sourcesEndpoint,
+      ApiConstans.newsEndpoint,
       {
         'apiKey': ApiConstans.apiKey,
         'sources': sourceID,

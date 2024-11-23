@@ -17,16 +17,15 @@ class NewsList extends StatelessWidget {
       future: ApiService.getNEws(sourceID),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return LoadingIndicator();
+          return const LoadingIndicator();
         } else if (snapshot.hasError || snapshot.data?.status != 'ok') {
-          return ErrorIndicator();
+          return const ErrorIndicator();
         } else {
           final newsList = snapshot.data?.articles ?? [];
           return ListView.builder(
             itemBuilder: (_, index) => NewsItem(newsList[index]),
             itemCount: newsList.length,
           );
-          ;
         }
       },
     );
