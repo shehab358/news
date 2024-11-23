@@ -23,7 +23,7 @@ class NewsList extends StatelessWidget {
         } else {
           final newsList = snapshot.data?.articles ?? [];
           return ListView.builder(
-            itemBuilder: (_, index) => NewsItem(),
+            itemBuilder: (_, index) => NewsItem(newsList[index]),
             itemCount: newsList.length,
           );
           ;

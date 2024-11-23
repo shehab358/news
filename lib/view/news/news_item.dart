@@ -7,7 +7,7 @@ import 'package:news/view/widgets/loading_indicator.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class NewsItem extends StatelessWidget {
-  const NewsItem(this.article{super.key});
+  const NewsItem(this.article, {super.key});
 
   final Article article;
 
@@ -23,7 +23,7 @@ class NewsItem extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(5),
             child: CachedNetworkImage(
-              imageUrl: 'https://via.placeholder.com/150',
+              imageUrl: article.urlToImage ?? 'https://via.placeholder.com/150',
               height: MediaQuery.sizeOf(context).height * 0.25,
               width: double.infinity,
               fit: BoxFit.fill,
@@ -33,14 +33,14 @@ class NewsItem extends StatelessWidget {
             ),
           ),
           Text(
-            "BBC News",
+            article.title ?? '',
             style: titleSmall?.copyWith(fontSize: 10, color: AppTheme.grey),
           ),
           const SizedBox(
             height: 4,
           ),
           Text(
-            "Description Description Description Description Description Description Description Description Description ",
+            article.description ?? '',
             style: titleSmall?.copyWith(
               fontWeight: FontWeight.w500,
             ),
@@ -51,7 +51,9 @@ class NewsItem extends StatelessWidget {
           Align(
             alignment: AlignmentDirectional.centerEnd,
             child: Text(
-              timeago.format(fifteenAgo),
+              timeago.format(
+                DateTime.parse(article.publishedAt!),
+              ),
               style: titleSmall?.copyWith(
                 color: AppTheme.grey,
                 fontSize: 13,
