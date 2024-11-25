@@ -39,7 +39,7 @@ class NewsItem extends StatelessWidget {
             height: 4,
           ),
           Text(
-            article.title ?? '',
+            article.title ?? ' ',
             style: titleSmall?.copyWith(
               fontWeight: FontWeight.w500,
             ),

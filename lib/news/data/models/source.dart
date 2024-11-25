@@ -8,6 +8,4 @@ class Source {
         id: json['id'] as String?,
         name: json['name'] as String?,
       );
-
-
 }
