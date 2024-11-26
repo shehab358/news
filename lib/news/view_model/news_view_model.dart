@@ -24,4 +24,16 @@ class NewsViewModel with ChangeNotifier {
     isLoading = false;
     notifyListeners();
   }
+
+  Future<void> searchNews(String query) async {
+    isLoading = true;
+    notifyListeners();
+    try {
+      newsList = await repository.searchNews(query);
+    } on Exception catch (e) {
+      errMessage = e.toString();
+    }
+    isLoading = false;
+    notifyListeners();
+  }
 }

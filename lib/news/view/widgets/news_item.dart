@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:news/news/view/screens/news_details.dart';
 import 'package:news/shared/app_theme.dart';
 import 'package:news/news/data/models/article.dart';
 import 'package:news/shared/widgets/loading_indicator.dart';
@@ -19,16 +20,35 @@ class NewsItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(5),
-            child: CachedNetworkImage(
-              imageUrl: article.urlToImage ?? 'https://via.placeholder.com/150',
-              height: MediaQuery.sizeOf(context).height * 0.25,
-              width: double.infinity,
-              fit: BoxFit.fill,
-              placeholder: (context, url) => const LoadingIndicator(),
-              errorWidget: (context, url, error) =>
-                  const Icon(Icons.image_not_supported),
+          GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                NewsDetails.route,
+                arguments: NewsDetailsArg(
+                  source: article.source?.name ?? '',
+                  author: article.author ?? ' ',
+                  title: article.title,
+                  description: article.description,
+                  url: article.url,
+                  urlToImage: article.urlToImage,
+                  publishedAt: article.publishedAt,
+                  content: article.content,
+                ),
+              );
+            },
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(5),
+              child: CachedNetworkImage(
+                imageUrl:
+                    article.urlToImage ?? 'https://via.placeholder.com/150',
+                height: MediaQuery.sizeOf(context).height * 0.25,
+                width: double.infinity,
+                fit: BoxFit.fill,
+                placeholder: (context, url) => const LoadingIndicator(),
+                errorWidget: (context, url, error) =>
+                    const Icon(Icons.image_not_supported),
+              ),
             ),
           ),
           Text(
@@ -63,4 +83,26 @@ class NewsItem extends StatelessWidget {
       ),
     );
   }
+}
+
+class NewsDetailsArg {
+  final String? source;
+  final String? author;
+  final String? title;
+  final String? description;
+  final String? url;
+  final String? urlToImage;
+  final String? publishedAt;
+  final String? content;
+
+  const NewsDetailsArg({
+    required this.source,
+    required this.author,
+    required this.title,
+    required this.description,
+    required this.url,
+    required this.urlToImage,
+    required this.publishedAt,
+    required this.content,
+  });
 }

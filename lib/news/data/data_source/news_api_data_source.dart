@@ -26,4 +26,23 @@ class NewsAPIDataSource extends NewsDataSource {
       throw Exception('Failed to get news');
     }
   }
+
+  Future<List<Article>> searchNews(String query) async {
+    final uri = Uri.http(
+      ApiConstans.baseURL,
+      ApiConstans.everythingEndpoint,
+      {
+        'apiKey': ApiConstans.apiKey,
+        'q': query,
+      },
+    );
+    final response = await http.get(uri);
+    final json = jsonDecode(response.body);
+    final newsResponse = NewsResponse.fromJson(json);
+    if (newsResponse.status == 'ok' && newsResponse.articles != null) {
+      return newsResponse.articles!;
+    } else {
+      throw Exception('Failed to Search News');
+    }
+  }
 }

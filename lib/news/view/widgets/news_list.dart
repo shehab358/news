@@ -6,6 +6,8 @@ import 'package:news/shared/widgets/loading_indicator.dart';
 import 'package:provider/provider.dart';
 
 class NewsList extends StatefulWidget {
+
+  
   const NewsList(
     this.sourceID, {
     super.key,
